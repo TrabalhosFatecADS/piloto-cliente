@@ -31,7 +31,6 @@ public class MainActivity extends AppCompatActivity {
                 //Log.i("[MainActivity] =>", "Buscando CEP!");
                 if(etCep.getText().toString().length() > 0 &&
                         !etCep.getText().toString().equals("")){
-                    //Log.i("Teste", "C.E.P. Valido");
 
                     HTTPService service = new HTTPService(etCep.getText().toString());
                     try {
