@@ -16,24 +16,39 @@
         android:textSize="25sp"
         android:layout_width="match_parent"/>
 
-    <LinearLayout
-        android:gravity="center"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_width="match_parent">
-
         <Button
             android:background="@color/colorPrimary"
             android:layout_height="wrap_content"
             android:id="@+id/btnMain_buscarCep"
             android:layout_marginBottom="10dp"
             android:padding="10dp"
-            android:text="Buscar CEP"
+            android:text="Buscar Modelo"
             android:textColor="#FDFDFD"
             android:textSize="22sp"
             android:layout_width="wrap_content"/>
 
-    </LinearLayout>
+        <Button
+            android:background="@color/colorPrimary"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnMain_buscarMarca"
+            android:layout_marginBottom="10dp"
+            android:padding="10dp"
+            android:text="Buscar Marca"
+            android:textColor="#FDFDFD"
+            android:textSize="22sp"
+            android:layout_width="wrap_content"/>
+
+        <Button
+            android:background="@color/colorPrimary"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnMain_buscarTodos"
+            android:layout_marginBottom="10dp"
+            android:padding="10dp"
+            android:text="Buscar Todos"
+            android:textColor="#FDFDFD"
+            android:textSize="22sp"
+            android:layout_width="wrap_content"/>
+
 
     <TextView
         android:layout_height="match_parent"

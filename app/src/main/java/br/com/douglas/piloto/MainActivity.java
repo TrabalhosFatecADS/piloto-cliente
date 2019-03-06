@@ -8,10 +8,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import br.com.douglas.piloto.model.Car;
+import br.com.douglas.piloto.service.HTTPMarca;
 import br.com.douglas.piloto.service.HTTPService;
+import br.com.douglas.piloto.service.HTTPTodos;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,15 +26,12 @@ public class MainActivity extends AppCompatActivity {
         final EditText etCep = findViewById(R.id.etMain_cep);
         final TextView tvResposta = findViewById(R.id.etMain_resposta);
 
-        Button botao = findViewById(R.id.btnMain_buscarCep);
-        botao.setOnClickListener(new View.OnClickListener() {
+        Button botaoModelo = findViewById(R.id.btnMain_buscarCep);
+        botaoModelo.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                //Log.i("[MainActivity] =>", "Buscando CEP!");
-                if(etCep.getText().toString().length() > 0 &&
-                        !etCep.getText().toString().equals("")){
-
+                if(etCep.getText().toString().length() > 0 && !etCep.getText().toString().equals("")){
                     HTTPService service = new HTTPService(etCep.getText().toString());
                     try {
                         Car retorno = service.execute().get();
@@ -45,5 +45,54 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+        Button botaoMarca = findViewById(R.id.btnMain_buscarMarca);
+        botaoMarca.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                HTTPMarca service = new HTTPMarca(etCep.getText().toString());
+
+                String view = "";
+                try {
+                    List<Car> retorno = service.execute().get();
+                    for(Car car : retorno){
+                        view = view + car.getModelo().toString() + ", ";
+                        System.out.println(car.toString());
+                    }
+                    tvResposta.setText(view);
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                Log.i("casca", etCep.getText().toString());
+            }
+        });
+
+        Button botaoTodos = findViewById(R.id.btnMain_buscarTodos);
+        botaoTodos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                HTTPTodos service = new HTTPTodos();
+
+                String view = "";
+                try {
+                    List<Car> retorno = service.execute().get();
+                    for(Car car : retorno){
+                        view = view + car.getModelo().toString() + ", ";
+                        System.out.println(car.toString());
+                    }
+                    tvResposta.setText(view);
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                Log.i("casca", etCep.getText().toString());
+            }
+        });
+
     }
 }
